@@ -8,6 +8,14 @@
  *}
 <div class="item dates">
 	<div class="value">
-		{$dates}
+	{if isset(dates.received) }
+		{translate key="plugins.generic.dates.received"} {dates[received]} <br/>
+	{/if}
+	{if isset(dates.accepted) }
+		{translate key="plugins.generic.dates.accepted"} {dates[accepted]} <br/>
+	{/if}
+	{if isset(dates.published) }
+		{translate key="plugins.generic.dates.published"} {dates[published]} <br/>
+	{/if}
 	</div>
 </div>
