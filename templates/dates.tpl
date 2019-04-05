@@ -7,15 +7,16 @@
  *
  *}
 <div class="item dates">
-	<div class="value">
-	{if isset(dates.received) }
-		{translate key="plugins.generic.dates.received"} {dates[received]} <br/>
-	{/if}
-	{if isset(dates.accepted) }
-		{translate key="plugins.generic.dates.accepted"} {dates[accepted]} <br/>
-	{/if}
-	{if isset(dates.published) }
-		{translate key="plugins.generic.dates.published"} {dates[published]} <br/>
-	{/if}
-	</div>
+        <div class="value">
+        { if array_key_exists('received', $dates) }
+                        {translate key="plugins.generic.dates.received"} {$dates.received} <br/>
+        {/if}
+        {if $dates.accepted}
+                {translate key="plugins.generic.dates.accepted"} {$dates.accepted} <br/>
+        {/if}
+        {if $dates.published}
+                {translate key="plugins.generic.dates.published"} {$dates.published} <br/>
+        {/if}
+        </div>
 </div>
+
