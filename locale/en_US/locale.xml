@@ -14,4 +14,7 @@
 <locale name="en_US" full_name="U.S. English">
   <message key="plugins.generic.dates.displayName">Dates Plugin</message>
   <message key="plugins.generic.dates.description">Add submission, review and publish dates to article page.</message>
+  <message key="plugins.generic.dates.received">Received</message>
+  <message key="plugins.generic.dates.accepted">Accepted</message>
+  <message key="plugins.generic.dates.published">Published</message>
 </locale>

@@ -74,13 +74,14 @@ class DatesPlugin extends GenericPlugin {
 			if ($decision['stageId'] == '3' && $decision['decision'] == '1')
 				$reviewdate = $decision[dateDecided];			
 		}
-
+		
+		$dates = array();
 		if ($submitdate)
-			$dates .= "Received " . date('Y-m-d',strtotime($submitdate)) . "<br />";
+			$dates['received'] = date('Y-m-d',strtotime($submitdate));
 		if ($reviewdate)
-			$dates .= "Accepted " . date('Y-m-d',strtotime($reviewdate)) . "<br />";
+			$dates['accepted'] = date('Y-m-d',strtotime($reviewdate));
 		if ($publishdate)
-			$dates .= "Published " . date('Y-m-d',strtotime($publishdate));
+			$dates['published'] = date('Y-m-d',strtotime($publishdate));
 
 		$smarty->assign('dates', $dates);
 
