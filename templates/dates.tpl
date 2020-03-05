@@ -8,7 +8,7 @@
  *}
 <div class="item dates">
         <div class="value">
-        { if array_key_exists('received', $dates) }
+        {if array_key_exists('received', $dates)}
                         {translate key="plugins.generic.dates.received"} {$dates.received} <br/>
         {/if}
         {if $dates.accepted}
