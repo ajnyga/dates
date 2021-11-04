@@ -1,4 +1,4 @@
-# Dates plugin for OJS 3.2.1
+# Dates plugin for OJS 3.3
 
 Display Received, Accepted and Published dates on the article landing page.
 
