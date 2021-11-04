@@ -3,9 +3,9 @@
 /**
  * @file plugins/generic/dates/DatesPlugin.inc.php
  *
- * Copyright (c) 2014-2019 Simon Fraser University
- * Copyright (c) 2003-2019 John Willinsky
- * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+ * Copyright (c) 2014-2021 Simon Fraser University
+ * Copyright (c) 2003-2021 John Willinsky
+ * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class dates
  * @ingroup plugins_generic_dates
@@ -57,7 +57,7 @@ class DatesPlugin extends GenericPlugin {
 		$request = $this->getRequest();
 		$context = $request->getContext();
 
-		$smarty =& $params[1];
+		$smarty = $params[1];
 		$output =& $params[2];
 
 		$article = $smarty->get_template_vars('article');
@@ -67,14 +67,17 @@ class DatesPlugin extends GenericPlugin {
 		$publishdate = $article->getDatePublished();
 		$reviewdate = "";
 
+		// Get all decisions for this submission
 		$editDecisionDao = DAORegistry::getDAO('EditDecisionDAO');
 		$decisions = $editDecisionDao->getEditorDecisions($article->getId());
 
+		// Loop through the decisions
 		foreach ($decisions as $decision) {
+			// If we have a review stage decision and it was a submission accepted decision, get to date for the decision
 			if ($decision['stageId'] == '3' && $decision['decision'] == '1')
-				$reviewdate = $decision[dateDecided];			
+				$reviewdate = $decision['dateDecided'];
 		}
-		
+
 		$dates = array();
 		if ($submitdate)
 			$dates['received'] = date('Y-m-d',strtotime($submitdate));
@@ -83,10 +86,12 @@ class DatesPlugin extends GenericPlugin {
 		if ($publishdate)
 			$dates['published'] = date('Y-m-d',strtotime($publishdate));
 
-		$smarty->assign('dates', $dates);
-
-		$output .= $smarty->fetch($this->getTemplateResource('dates.tpl'));
-		return false;		
+		// Only show dates if there was a review
+		if ($reviewdate){
+			$smarty->assign('dates', $dates);
+			$output .= $smarty->fetch($this->getTemplateResource('dates.tpl'));
+		}
+		return false;
 
 	}
 }

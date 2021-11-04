@@ -4,17 +4,17 @@
 <!--
   * plugins/generic/dates/version.xml
   *
-  * Copyright (c) 2014-2019 Simon Fraser University
-  * Copyright (c) 2003-2019 John Willinsky
-  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+  * Copyright (c) 2014-2021 Simon Fraser University
+  * Copyright (c) 2003-2021 John Willinsky
+  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
   *
   * Plugin version information.
   -->
 <version>
 	<application>dates</application>
 	<type>plugins.generic</type>
-	<release>1.1.0.0</release>
-	<date>2019-03-19</date>
+	<release>1.2.0.0</release>
+	<date>2021-11-04</date>
 	<lazy-load>1</lazy-load>
 	<class>DatesPlugin</class>
 </version>
