@@ -67,12 +67,15 @@ class DatesPlugin extends GenericPlugin {
 		$publishdate = $article->getDatePublished();
 		$reviewdate = "";
 
+		// Get all decisions for this submission
 		$editDecisionDao = DAORegistry::getDAO('EditDecisionDAO');
 		$decisions = $editDecisionDao->getEditorDecisions($article->getId());
 
+		// Loop through the decisions
 		foreach ($decisions as $decision) {
+			// If we have a review stage decision and it was a submission accepted decision, get to date for the decision
 			if ($decision['stageId'] == '3' && $decision['decision'] == '1')
-				$reviewdate = $decision[dateDecided];
+				$reviewdate = $decision['dateDecided'];
 		}
 
 		$dates = array();
