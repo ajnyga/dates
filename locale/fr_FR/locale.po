@@ -1,0 +1,23 @@
+msgid ""
+msgstr ""
+
+"plugins/generic/dates/locale/en_US/locale.po
+"Copyright (c) 2014-2021 Simon Fraser University
+"Copyright (c) 2003-2021 John Willinsky
+"Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
+"dates plugin localization strings
+
+msgid "plugins.generic.dates.displayName"
+msgstr "Plugin Date"
+
+msgid "plugins.generic.dates.description"
+msgstr "Ajoute les dates de soumission, d'acceptation et de publication à la page article"
+
+msgid "plugins.generic.dates.received"
+msgstr "Reçu"
+
+msgid "plugins.generic.dates.accepted"
+msgstr "Accepté"
+
+msgid "plugins.generic.dates.published"
+msgstr "Publié"
