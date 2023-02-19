@@ -13,20 +13,21 @@
  * @brief dates plugin class
  */
 
-import('lib.pkp.classes.plugins.GenericPlugin');
+use APP\decision\Decision;
+use APP\facades\Repo;
+use PKP\plugins\GenericPlugin;
 
 class DatesPlugin extends GenericPlugin {
 	/**
 	 * Called as a plugin is registered to the registry
 	 * @param $category String Name of category plugin was registered to
-	 * @return boolean True iff plugin initialized successfully; if false,
+	 * @return boolean True if plugin initialized successfully; if false,
 	 * 	the plugin will not be registered.
 	 */
 	function register($category, $path, $mainContextId = NULL) {
 		$success = parent::register($category, $path, $mainContextId);
 		if (!Config::getVar('general', 'installed') || defined('RUNNING_UPGRADE')) return true;
 		if ($success && $this->getEnabled()) {
-			// Insert Dates div
 			HookRegistry::register('Templates::Article::Details', array($this, 'addDates'));
 		}
 		return $success;
@@ -60,22 +61,23 @@ class DatesPlugin extends GenericPlugin {
 		$smarty = $params[1];
 		$output =& $params[2];
 
-		$article = $smarty->get_template_vars('article');
+		$article = $smarty->getTemplateVars('article');
 
 		$dates = "";
 		$submitdate = $article->getDateSubmitted();
 		$publishdate = $article->getDatePublished();
 		$reviewdate = "";
 
-		// Get all decisions for this submission
-		$editDecisionDao = DAORegistry::getDAO('EditDecisionDAO');
-		$decisions = $editDecisionDao->getEditorDecisions($article->getId());
+        $decisions = Repo::decision()->getCollector()
+                ->filterBySubmissionIds([$article->getId()])
+                ->getMany();
 
 		// Loop through the decisions
 		foreach ($decisions as $decision) {
 			// If we have a review stage decision and it was a submission accepted decision, get to date for the decision
-			if ($decision['stageId'] == '3' && $decision['decision'] == '1')
-				$reviewdate = $decision['dateDecided'];
+			if ($decision->getData('stageId') == '3' && $decision->getData('decision') == '1'){
+				$reviewdate = $decision->getData('dateDecided');
+			}
 		}
 
 		$dates = array();
@@ -92,7 +94,6 @@ class DatesPlugin extends GenericPlugin {
 			$output .= $smarty->fetch($this->getTemplateResource('dates.tpl'));
 		}
 		return false;
-
 	}
 }
 
