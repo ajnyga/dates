@@ -7,16 +7,20 @@
  *
  *}
 <div class="item dates">
-        <div class="value">
+        <section class="sub_item">
         {if array_key_exists('received', $dates)}
-                        {translate key="plugins.generic.dates.received"} {$dates.received} <br/>
+                <h2 class="label">{translate key="plugins.generic.dates.received"} </h2>
+                <div class="value">{$dates.received} </div>
         {/if}
         {if $dates.accepted}
-                {translate key="plugins.generic.dates.accepted"} {$dates.accepted} <br/>
+                 <h2 class="label">
+                {translate key="plugins.generic.dates.accepted"}  </h2>
+                 <div class="value">{$dates.accepted} </div>
         {/if}
         {if $dates.published}
-                {translate key="plugins.generic.dates.published"} {$dates.published} <br/>
+                  <h2 class="label"> {translate key="plugins.generic.dates.published"}  </h2>
+                  <div class="value">{$dates.published} </div>
         {/if}
-        </div>
+        </section>
 </div>
 

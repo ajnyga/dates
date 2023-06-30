@@ -27,7 +27,7 @@ class DatesPlugin extends GenericPlugin {
 		if (!Config::getVar('general', 'installed') || defined('RUNNING_UPGRADE')) return true;
 		if ($success && $this->getEnabled()) {
 			// Insert Dates div
-			HookRegistry::register('Templates::Article::Details', array($this, 'addDates'));
+			HookRegistry::register('Templates::Article::Details::Dates', array($this, 'addDates'));
 		}
 		return $success;
 	}
@@ -60,7 +60,7 @@ class DatesPlugin extends GenericPlugin {
 		$smarty = $params[1];
 		$output =& $params[2];
 
-		$article = $smarty->get_template_vars('article');
+		$article = $templateMgr->get_template_vars('article');
 
 		$dates = "";
 		$submitdate = $article->getDateSubmitted();
