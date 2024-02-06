@@ -82,11 +82,11 @@ class DatesPlugin extends GenericPlugin {
 
 		$dates = array();
 		if ($submitdate)
-			$dates['received'] = date('Y-m-d',strtotime($submitdate));
+			$dates['received'] = date(Config::getVar('general', 'date_format_short'),strtotime($submitdate));
 		if ($reviewdate)
-			$dates['accepted'] = date('Y-m-d',strtotime($reviewdate));
+			$dates['accepted'] = date(Config::getVar('general', 'date_format_short'),strtotime($reviewdate));
 		if ($publishdate)
-			$dates['published'] = date('Y-m-d',strtotime($publishdate));
+			$dates['published'] = date(Config::getVar('general', 'date_format_short'),strtotime($publishdate));
 
 		// Only show dates if there was a review
 		if ($reviewdate){
